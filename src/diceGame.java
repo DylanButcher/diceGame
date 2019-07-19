@@ -94,17 +94,17 @@ public class diceGame {
             divider();
             for (int j = 0; j < 2; j++) {
                 divider();
-                System.out.println("This is "+inputUser[j]+"'s roll");
-                dice1 = roleDice();
-                dice2 = roleDice();
+                System.out.println("This is " + inputUser[j] + "'s roll");
+                dice1 = rollDice();
+                dice2 = rollDice();
                 System.out.println(inputUser[j] + " rolled a " + dice1 + " and a " + dice2);
                 points[j] = rulesCheck(j);
                 isDouble = rollDouble(dice1, dice2);
-                if(isDouble){
-                    System.out.println("Congrats "+inputUser[j]+" gets an extra roll ");
+                if (isDouble) {
+                    System.out.println("Congrats " + inputUser[j] + " gets an extra roll ");
                 }
-                points[j] += (dice1+dice2);
-                System.out.println(inputUser[j]+"'s Total score for the round is "+points[j]);
+                points[j] += (dice1 + dice2);
+                System.out.println(inputUser[j] + "'s Total score for the round is " + points[j]);
             }
         }
     }
@@ -113,7 +113,7 @@ public class diceGame {
         return ((d1 == d2) ? true : false);
     }
 
-    private static int roleDice() {
+    private static int rollDice() {
         int score = (int) (Math.random() * 6 + 1);
         return score;
     }

@@ -147,5 +147,3 @@ public class diceGame {
         System.out.println("-----------------------------------------");
     }
 }
-
-

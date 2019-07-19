@@ -63,14 +63,28 @@ public class diceGame {
             System.out.print("What's the password for Player " + (i + 1) + " ? >>> ");
             inputPass[i] = scan.nextLine();
         }
-        if ((authorisedUsers.get(inputUser[0])) == (null) || (authorisedUsers.get(inputUser[1])) == (null)) {  //uses the usernames as keys to see if they are found in the hashmap and if theyre not, it returns null so heres a work around it
+        
+        if (inputPass[0].equals(authorisedUsers.get(inputUser[0])) && inputPass[1].equals(authorisedUsers.get(inputUser[1]))) {
+            game();
+        } else {
+            loginFail();
+        }
+        
+        /*if (authorisedUsers.get(inputUser[0]).equals(inputPass[0])) && authorisedUsers.get(inputUser[1]).equals(inputPass[1])) {
+            game();
+        } else {
+            loginFail();
+        }
+        
+        
+        if (authorisedUsers.get(inputUser[0]) == null || authorisedUsers.get(inputUser[1]) == null) {  //uses the usernames as keys to see if they are found in the hashmap and if theyre not, it returns null so heres a work around it
             loginAttempts--;
             loginFail();
         } else if ((authorisedUsers.get(inputUser[0])).equals(inputPass[0]) && (authorisedUsers.get(inputUser[1])).equals(inputPass[1])) { //if both usernames are found in hashmap it says all good :)
             game();
         } else {
             loginFail();
-        }
+        }*/
     }
 
     private static void loginFail() {

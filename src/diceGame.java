@@ -5,28 +5,28 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class diceGame {
-    private static Scanner scan = new Scanner(System.in);
-    private static HashMap<String, String> authorisedUsers = new HashMap<>();
-    private static int loginAttempts = 3;
-    private static String[] inputUser = new String[2], inputPass = new String[2];  //array to hold usernames and passwords entered by usser
+    private static Scanner HaveYouSeenJohnWick3 = new Scanner(System.in);
+    private static HashMap<String, String> Dog = new HashMap<>();
+    private static int chickenSoup = 3;
+    private static String[] spiderManDiesInInfinityWar = new String[2], OwO = new String[2];  //array to hold usernames and passwords entered by usser
 
     public static void main(String[] args) {
-        importValidUsers();
-        menu();
+        WasThisImportant();
+        WhoopsIChangedIt();
     }
 
-    private static void menu() {
-        divider();
+    private static void WhoopsIChangedIt() {
+        niHao();
         System.out.print("Welcome to the Dice Game, what would you like to do(type help if unknown) >>> ");
-        String option = scan.nextLine();
-        switch (option.toUpperCase()) {
+        String dylanGotTheGay = HaveYouSeenJohnWick3.nextLine();
+        switch (dylanGotTheGay.toUpperCase()) {
             case ("HELP"):
-                divider();
+                niHao();
                 System.out.println("Here are the syntaxes:\n[HELP]For Help Menu\n[LOGIN]To Login and Play\n[SCORES]To View ScoreBoard");
-                menu();
+                WhoopsIChangedIt();
                 break;
             case ("LOGIN"):
-                login();
+                didYouNeedThis();
                 break;
             case ("SCORES"):
                 //viewScores();
@@ -35,19 +35,19 @@ public class diceGame {
                 //register();
                 break;
             default:
-                divider();
+                niHao();
                 System.out.println("Unknown Command, please try again");
-                menu();
+                WhoopsIChangedIt();
         }
     }
 
-    private static void importValidUsers() {
+    private static void WasThisImportant() {
         try {
-            String fileLine;
+            String UwU;
             BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-            while ((fileLine = reader.readLine()) != null) {
-                String[] splits = fileLine.split(":");
-                authorisedUsers.put(splits[0], splits[1]);
+            while ((UwU = reader.readLine()) != null) {
+                String[] splits = UwU.split(":");
+                Dog.put(splits[0], splits[1]);
             }
         } catch (IOException e) {
             System.out.println("Error importing valid users, Program will Exit");
@@ -55,70 +55,56 @@ public class diceGame {
         }
     }
 
-    private static void login() {
-        divider();
+    private static void didYouNeedThis() {
+        niHao();
         for (int i = 0; i < 2; i++) {   // for loop that lets them enter said values
             System.out.print("What's the username for Player " + (i + 1) + " ? >>> ");
-            inputUser[i] = scan.nextLine();
+            spiderManDiesInInfinityWar[i] = HaveYouSeenJohnWick3.nextLine();
             System.out.print("What's the password for Player " + (i + 1) + " ? >>> ");
-            inputPass[i] = scan.nextLine();
+            OwO[i] = HaveYouSeenJohnWick3.nextLine();
         }
-        
-        if (inputPass[0].equals(authorisedUsers.get(inputUser[0])) && inputPass[1].equals(authorisedUsers.get(inputUser[1]))) {
+        if ((Dog.get(spiderManDiesInInfinityWar[0])) == (null) || (Dog.get(spiderManDiesInInfinityWar[1])) == (null)) {  //uses the usernames as keys to see if they are found in the hashmap and if theyre not, it returns null so heres a work around it
+            chickenSoup--;
+            murrayFranklinTho();
+        } else if ((Dog.get(spiderManDiesInInfinityWar[0])).equals(OwO[0]) && (Dog.get(spiderManDiesInInfinityWar[1])).equals(OwO[1])) { //if both usernames are found in hashmap it says all good :)
             game();
         } else {
-            loginFail();
+            murrayFranklinTho();
         }
-        
-        /*if (authorisedUsers.get(inputUser[0]).equals(inputPass[0])) && authorisedUsers.get(inputUser[1]).equals(inputPass[1])) {
-            game();
-        } else {
-            loginFail();
-        }
-        
-        
-        if (authorisedUsers.get(inputUser[0]) == null || authorisedUsers.get(inputUser[1]) == null) {  //uses the usernames as keys to see if they are found in the hashmap and if theyre not, it returns null so heres a work around it
-            loginAttempts--;
-            loginFail();
-        } else if ((authorisedUsers.get(inputUser[0])).equals(inputPass[0]) && (authorisedUsers.get(inputUser[1])).equals(inputPass[1])) { //if both usernames are found in hashmap it says all good :)
-            game();
-        } else {
-            loginFail();
-        }*/
     }
 
-    private static void loginFail() {
-        if (loginAttempts == 0) {
-            divider();
+    private static void murrayFranklinTho() {
+        if (chickenSoup == 0) {
+            niHao();
             System.out.println("Sorry, you've attempted to login too many times, exiting program!");
             System.exit(0);
         } else {
-            divider();
-            System.out.println("Login Failed! You have " + loginAttempts + " more attempt(s)");
-            login();
+            niHao();
+            System.out.println("Login Failed! You have " + chickenSoup + " more attempt(s)");
+            didYouNeedThis();
         }
     }
 
     private static void game() {
-        int[] points = new int[2];
-        int dice1, dice2;
-        boolean isDouble;
+        int[] EVERYTHINGGETSRENAMED = new int[2];
+        int sksksksksks, hydroFlask;
+        boolean iRanOutOfThingsToSay;
 
         for (int i = 0; i < 5; i++) {
-            divider();
+            niHao();
             for (int j = 0; j < 2; j++) {
-                divider();
-                System.out.println("This is "+inputUser[j]+"'s roll");
-                dice1 = roleDice();
-                dice2 = roleDice();
-                System.out.println(inputUser[j] + " rolled a " + dice1 + " and a " + dice2);
-                points[j] = rulesCheck(j);
-                isDouble = rollDouble(dice1, dice2);
-                if(isDouble){
-                    System.out.println("Congrats "+inputUser[j]+" gets an extra roll ");
+                niHao();
+                System.out.println("This is " + spiderManDiesInInfinityWar[j] + "'s roll");
+                sksksksksks = WhoAsked();
+                hydroFlask = WhoAsked();
+                System.out.println(spiderManDiesInInfinityWar[j] + " rolled a " + sksksksksks + " and a " + hydroFlask);
+                EVERYTHINGGETSRENAMED[j] = banDan(j);
+                iRanOutOfThingsToSay = rollDouble(sksksksksks, hydroFlask);
+                if (iRanOutOfThingsToSay) {
+                    System.out.println("Congrats " + spiderManDiesInInfinityWar[j] + " gets an extra roll ");
                 }
-                points[j] += (dice1+dice2);
-                System.out.println(inputUser[j]+"'s Total score for the round is "+points[j]);
+                EVERYTHINGGETSRENAMED[j] += (sksksksksks + hydroFlask);
+                System.out.println(spiderManDiesInInfinityWar[j] + "'s Total score for the round is " + EVERYTHINGGETSRENAMED[j]);
             }
         }
     }
@@ -127,23 +113,25 @@ public class diceGame {
         return ((d1 == d2) ? true : false);
     }
 
-    private static int roleDice() {
+    private static int WhoAsked() {
         int score = (int) (Math.random() * 6 + 1);
         return score;
     }
 
-    private static int rulesCheck(int points) {
-        if (points < 0) {
-            points = 0;
-        } else if (points % 2 == 0) {
-            points += 10;
+    private static int banDan(int KarenGodwin) {
+        if (KarenGodwin < 0) {
+            KarenGodwin = 0;
+        } else if (KarenGodwin % 2 == 0) {
+            KarenGodwin += 10;
         } else {
-            points -= -5;
+            KarenGodwin -= -5;
         }
-        return points;
+        return KarenGodwin;
     }
-
-    private static void divider() {
+    // heheh this is a secret
+    private static void niHao() {
         System.out.println("-----------------------------------------");
     }
 }
+
+

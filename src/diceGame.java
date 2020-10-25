@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class diceGame {
-    
-    diceGame(){
-        authorisedUsers = importValidUsers();
+    private static Scanner scan = new Scanner(System.in);
+    private static HashMap<String, String> authorisedUsers = new HashMap<>();
+    private static int loginAttempts = 3;
+    private static String[] inputUser = new String[2], inputPass = new String[2];  //array to hold usernames and passwords entered by usser
+
+    public static void main(String[] args) {
+        importValidUsers();
         menu();
     }
-    private Scanner scan = new Scanner(System.in);
-    private HashMap<String, String> authorisedUsers;
-    private int loginAttempts = 3;
-    private String[] inputUser = new String[2], inputPass = new String[2];  //array to hold usernames and passwords entered by user
 
-    private void menu() {
+    private static void menu() {
         divider();
         System.out.print("Welcome to the Dice Game, what would you like to do(type help if unknown) >>> ");
         String option = scan.nextLine();
@@ -41,23 +41,21 @@ public class diceGame {
         }
     }
 
-    private HashMap<String,String> importValidUsers() {
-        HashMap<String,String> x = new HashMap<>();
+    private static void importValidUsers() {
         try {
             String fileLine;
             BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
             while ((fileLine = reader.readLine()) != null) {
                 String[] splits = fileLine.split(":");
-                x.put(splits[0], splits[1]);
+                authorisedUsers.put(splits[0], splits[1]);
             }
         } catch (IOException e) {
             System.out.println("Error importing valid users, Program will Exit");
             System.exit(0);
         }
-        return x;
     }
 
-    private void login() {
+    private static void login() {
         divider();
         for (int i = 0; i < 2; i++) {   // for loop that lets them enter said values
             System.out.print("What's the username for Player " + (i + 1) + " ? >>> ");
@@ -71,9 +69,25 @@ public class diceGame {
         } else {
             loginFail();
         }
+        
+        /*if (authorisedUsers.get(inputUser[0]).equals(inputPass[0])) && authorisedUsers.get(inputUser[1]).equals(inputPass[1])) {
+            game();
+        } else {
+            loginFail();
+        }
+        
+        
+        if (authorisedUsers.get(inputUser[0]) == null || authorisedUsers.get(inputUser[1]) == null) {  //uses the usernames as keys to see if they are found in the hashmap and if theyre not, it returns null so heres a work around it
+            loginAttempts--;
+            loginFail();
+        } else if ((authorisedUsers.get(inputUser[0])).equals(inputPass[0]) && (authorisedUsers.get(inputUser[1])).equals(inputPass[1])) { //if both usernames are found in hashmap it says all good :)
+            game();
+        } else {
+            loginFail();
+        }*/
     }
 
-    private void loginFail() {
+    private static void loginFail() {
         if (loginAttempts == 0) {
             divider();
             System.out.println("Sorry, you've attempted to login too many times, exiting program!");
@@ -85,7 +99,7 @@ public class diceGame {
         }
     }
 
-    private void game() {
+    private static void game() {
         int[] points = new int[2];
         int dice1, dice2;
         boolean isDouble;
@@ -109,16 +123,16 @@ public class diceGame {
         }
     }
 
-    private boolean rollDouble(int d1, int d2) {
+    private static boolean rollDouble(int d1, int d2) {
         return ((d1 == d2) ? true : false);
     }
 
-    private int roleDice() {
+    private static int roleDice() {
         int score = (int) (Math.random() * 6 + 1);
         return score;
     }
 
-    private int rulesCheck(int points) {
+    private static int rulesCheck(int points) {
         if (points < 0) {
             points = 0;
         } else if (points % 2 == 0) {
@@ -129,7 +143,7 @@ public class diceGame {
         return points;
     }
 
-    private void divider() {
+    private static void divider() {
         System.out.println("-----------------------------------------");
     }
 }
